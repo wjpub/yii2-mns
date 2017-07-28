@@ -1,0 +1,22 @@
+{
+    "name": "wjpub/yii2-mns",
+    "description": "Yii2 ali mns",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "WangJian",
+            "email": "1179398538@qq.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php" : "~5.5|~7.0",
+        "yiisoft/yii2": "~2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "wjpub\\yii2mns\\": "src"
+        }
+    }
+}
