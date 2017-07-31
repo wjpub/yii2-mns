@@ -14,24 +14,22 @@ class Mns extends \yii\base\Component
     public $endPoint = '';
     public $accessId = '';
     public $accessKey = '';
+    public $topicName = 'sms.topic-cn-beijing';
 
     private $client = null;
     private $topic = null;
-
-    const SMS_TOPIC = 'sms.topic-cn-beijing';
 
     public function init()
     {
         parent::init();
         $this->client = new Client($this->endPoint, $this->accessId, $this->accessKey);
-        $this->topic = $this->client->getTopicRef(self::SMS_TOPIC);
+        $this->topic = $this->client->getTopicRef($this->topicName);
     }
 
     public function sendSms($signName, $templateCode, $phone, $params)
     {
         $batchSmsAttributes = new BatchSmsAttributes($signName, $templateCode);
         $batchSmsAttributes->addReceiver((string)$phone, $this->stringParams($params));
-        //$batchSmsAttributes->addReceiver((string)'15811312907', ["code" => "123444"]);
         $messageAttributes = new MessageAttributes(array($batchSmsAttributes));
         $messageBody = "text";
         $request = new PublishMessageRequest($messageBody, $messageAttributes);
