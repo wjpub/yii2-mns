@@ -1,14 +1,9 @@
 <?php
-namespace deepwise\yii2mns;
+namespace wjpub\yii2mns;
 
 require_once('mns-autoloader.php');
 
-use Yii;
 use AliyunMNS\Client;
-use AliyunMNS\Topic;
-use AliyunMNS\Constants;
-use AliyunMNS\Model\MailAttributes;
-use AliyunMNS\Model\SmsAttributes;
 use AliyunMNS\Model\BatchSmsAttributes;
 use AliyunMNS\Model\MessageAttributes;
 use AliyunMNS\Exception\MnsException;
