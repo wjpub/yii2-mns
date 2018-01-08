@@ -1,7 +1,7 @@
 <?php
 namespace wjpub\yii2mns;
 ini_set("display_errors", "on");
-require_once dirname(__DIR__) . '/api_sdk/vendor/autoload.php';
+require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'src' .DIRECTORY_SEPARATOR. 'api_sdk'. DIRECTORY_SEPARATOR .'vendor'. DIRECTORY_SEPARATOR .'autoload.php';
 
 use Aliyun\Core\Config;
 use Aliyun\Core\Exception\ClientException;
@@ -15,7 +15,7 @@ class Mns extends \yii\base\Component
     public $endPoint = '';
     public $accessId = '';
     public $accessKey = '';
-    public $region = 'cn-beijing';
+    public $region = 'cn-hangzhou';
     public $product = "Dysmsapi";
     public $domain = "dysmsapi.aliyuncs.com";
 
@@ -23,6 +23,7 @@ class Mns extends \yii\base\Component
 
     public function init()
     {
+        $this->endPoint = 'cn-hangzhou';
         parent::init();
         $profile = DefaultProfile::getProfile($this->region, $this->accessId, $this->accessKey);
         // 增加服务结点
@@ -42,21 +43,22 @@ class Mns extends \yii\base\Component
         // 必填，设置模板CODE，应严格按"模板CODE"填写, 请参考: https://dysms.console.aliyun.com/dysms.htm#/develop/template
         $request->setTemplateCode($templateCode);
         // 可选，设置模板参数, 假如模板中存在变量需要替换则为必填项
-        $request->setTemplateParam(self::stringParams($params), JSON_UNESCAPED_UNICODE);
+        $request->setTemplateParam(json_encode(self::stringParams($params), JSON_UNESCAPED_UNICODE));
 
         // 发起访问请求
         try
         {
             $res = $this->client->getAcsResponse($request);
-            if ($res->isSucceed()) {
-                return $res->getMessageId();
+
+            if ($res->Code == 'OK') {
+                return $res->RequestId;
             } else {
-                return false;
+                return json_encode($res);
             }
         }
-        catch (ClientException $e)
+        catch (Exception $e)
         {
-            return false;
+            return $e;
         }
     }
 
