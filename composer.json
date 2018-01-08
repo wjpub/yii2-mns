@@ -19,7 +19,10 @@
     },
     "autoload": {
         "psr-4": {
-            "wjpub\\yii2mns\\": "src"
+            "wjpub\\yii2mns\\": "src",
+            "Aliyun\\": "src/lib/",
+            "Aliyun\\Test\\": "src/tests/",
+            "AliyunMNS\\": "src/lib/MNS"
         }
     }
 }

@@ -1,15 +1,15 @@
 <?php
 namespace wjpub\yii2mns;
 ini_set("display_errors", "on");
-require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'src' .DIRECTORY_SEPARATOR. 'api_sdk'. DIRECTORY_SEPARATOR .'vendor'. DIRECTORY_SEPARATOR .'autoload.php';
+require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR .'vendor'. DIRECTORY_SEPARATOR .'autoload.php';
 
 use Aliyun\Core\Config;
-use Aliyun\Core\Exception\ClientException;
 use Aliyun\Core\Profile\DefaultProfile;
 use Aliyun\Core\DefaultAcsClient;
 use Aliyun\Api\Sms\Request\V20170525\SendSmsRequest;
 
 Config::load();
+
 class Mns extends \yii\base\Component
 {
     public $endPoint = '';
